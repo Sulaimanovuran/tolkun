@@ -14,8 +14,8 @@ class Warehouse(models.Model):
 
 
 LIFE = [
-    (0, 'Без срока годности'),
-    (1, 'Со сроком годности')
+    ('NOT', 'Без срока годности'),
+    ('YES', 'Со сроком годности')
 ]
 
 class Product(models.Model):
@@ -35,11 +35,10 @@ class Product(models.Model):
         return f'{self.id}. {self.name}'
     
     def save(self, *args, **kwargs):
-        if self.life:
-            self.life = self.life
+        if self.life == 'YES':
             return super(Product, self).save(*args, **kwargs)
         else:
-            self.life = None
+            self.shelf_life = None
             return super(Product, self).save(*args, **kwargs)
 
 
