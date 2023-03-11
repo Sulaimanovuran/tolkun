@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {Redirect, Route, Switch} from "react-router-dom";
+import {useSelector} from "react-redux";
+import TolkunBuilder from "./containers/MusicAppBuilder/TolkunBuilder";
+import Layout from "./components/UI/Layout/Layout";
+import AlbumsPage from "./containers/AlbumsPage/AlbumsPage";
+import Registration from "./containers/Registration/Registration";
+import Login from "./containers/Login/Login";
+import AddArtist from "./containers/AddArtist/AddArtist";
+import AddAlbum from "./containers/AddAlbum/AddAlbum";
+import AddTrack from "./containers/AddTrack/AddTrack";
+import AdminPage from "./containers/AdminPage/AdminPage";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const ProtectedRoute = ({isAllowed, redirectTo, ...props}) => {
+    return isAllowed ?
+        <Route {...props}/> :
+        <Redirect to={redirectTo}/>
+};
+
+const App = () => {
+    const user = useSelector(state => state.users.user);
+
+    return (
+        <Layout>
+            <Switch>
+                <Route path="/" exact component={user?.role === 'admin' ? AdminPage : TolkunBuilder}/>
+                <Route path="/albums" exact component={AlbumsPage}/>
+                <Route path="/registration" component={Registration}/>
+                <Route path="/login" component={Login}/>
+                <ProtectedRoute
+                    isAllowed={user}
+                    redirectTo="/"
+                    path="/artists/new"
+                    component={AddArtist}
+                />
+                <ProtectedRoute
+                    isAllowed={user}
+                    redirectTo="/"
+                    path="/albums/new"
+                    component={AddAlbum}
+                />
+                <ProtectedRoute
+                    isAllowed={user}
+                    redirectTo="/"
+                    path="/tracks/new"
+                    component={AddTrack}
+                />
+                <Route render={() => <h1>Not Found</h1>} />
+            </Switch>
+        </Layout>
+    );
+};
 
 export default App;
