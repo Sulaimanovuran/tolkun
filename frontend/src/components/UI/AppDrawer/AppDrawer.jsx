@@ -14,11 +14,13 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import {categories} from '../../../constants';
-
+import logo from '../../../assets/logo.png'
+import '../Layout/Layout.css';
 const drawerWidth = 240;
 
 const AppDrawer = () => {
   return (
+    
     <Drawer
       sx={{
         width: drawerWidth,
@@ -32,11 +34,19 @@ const AppDrawer = () => {
       variant="permanent"
       anchor="left"
     >
-      <Toolbar />
+      <Toolbar >
+      <img width="50px" src={logo} alt="" />
+      <span className='span_logo' >Tolkun</span>
+      </Toolbar>
+      
       <Divider />
+      
       <List>
+        
         {categories.map((text, index) => (
+          
           <ListItem key={text} disablePadding>
+            
             <ListItemButton>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
