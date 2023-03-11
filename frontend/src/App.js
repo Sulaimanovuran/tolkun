@@ -9,7 +9,6 @@ import Login from "./containers/Login/Login";
 import AddArtist from "./containers/AddArtist/AddArtist";
 import AddAlbum from "./containers/AddAlbum/AddAlbum";
 import AddTrack from "./containers/AddTrack/AddTrack";
-import AdminPage from "./containers/AdminPage/AdminPage";
 
 const ProtectedRoute = ({isAllowed, redirectTo, ...props}) => {
     return isAllowed ?
@@ -23,7 +22,7 @@ const App = () => {
     return (
         <Layout>
             <Switch>
-                <Route path="/" exact component={user?.role === 'admin' ? AdminPage : TolkunBuilder}/>
+                <Route path="/" exact component={TolkunBuilder}/>
                 <Route path="/albums" exact component={AlbumsPage}/>
                 <Route path="/registration" component={Registration}/>
                 <Route path="/login" component={Login}/>
