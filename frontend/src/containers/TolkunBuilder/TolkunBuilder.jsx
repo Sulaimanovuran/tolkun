@@ -4,7 +4,7 @@ import {Grid, Typography} from "@mui/material";
 import {fetchArtists} from "../../store/actions/artistsActions";
 import ArtistsList from "../../components/ArtistsList/ArtistsList";
 import Spinner from "../../components/UI/Spinner/Spinner";
-
+import "../TolkunBuilder/TolkunBuilder.css"
 const TolkunBuilder = () => {
     const dispatch = useDispatch();
     const artists = useSelector(state => state.artists.artists);
@@ -20,15 +20,28 @@ const TolkunBuilder = () => {
             <Grid item container justifyContent="space-between" alignItems="center">
                 <Grid item>
                     <Typography variant="h5">
-                        Artists
+                       
                     </Typography>
                     {artists.length < 1 &&
                         <Typography variant="body">
-                        There are no Artists. Please add...
+                        
                     </Typography>
                     }
                 </Grid>
             </Grid>
+            <div className='block_static'>
+            <div className='info_statistic1'>
+                <h1>coute</h1>
+                
+            </div>
+            <div className='info_statistic1'>2</div>
+            <div className='info_statistic1'>3</div>
+            <div className='info_statistic1'>4</div>
+           
+            
+            </div>
+            
+            
             {loading
                 ? <Spinner/>
                 : <div className="List">

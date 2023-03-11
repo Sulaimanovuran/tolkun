@@ -1,7 +1,7 @@
 import React from 'react';
 import {Redirect, Route, Switch} from "react-router-dom";
 import {useSelector} from "react-redux";
-import TolkunBuilder from "./containers/MusicAppBuilder/TolkunBuilder";
+import TolkunBuilder from "./containers/TolkunBuilder/TolkunBuilder";
 import Layout from "./components/UI/Layout/Layout";
 import Products from "./containers/Products/Products";
 import Registration from "./containers/Registration/Registration";

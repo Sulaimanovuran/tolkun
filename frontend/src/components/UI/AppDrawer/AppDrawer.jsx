@@ -1,7 +1,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import {styled, useTheme} from "@mui/material";
 import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,16 +14,12 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import {categories} from '../../../constants';
+import logo from '../../../assets/logo.png'
+import '../Layout/Layout.css';
 import {Link} from "react-router-dom";
 
 const drawerWidth = 240;
-const DrawerHeader = styled('div')(({theme}) => ({
-  // display: 'flex',
-  // alignItems: 'center',
-  // padding: theme.spacing(1),
-  // justifyContent: 'center',
-  backgroundColor: 'transparent'
-}));
+
 const AppDrawer = () => {
   return (
     <Drawer
@@ -40,10 +35,11 @@ const AppDrawer = () => {
       variant="permanent"
       anchor="left"
     >
-      <Toolbar />
-      <DrawerHeader>
-        {/*<Logo/>*/}
-      </DrawerHeader>
+      <Toolbar >
+      <img width="50px" src={logo} alt="" />
+      <span className='span_logo' >TOLKUN</span>
+      </Toolbar>
+
       <Divider />
       <List>
         {categories.map((cat, index) => (
