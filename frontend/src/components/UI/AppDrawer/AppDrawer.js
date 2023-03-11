@@ -13,16 +13,16 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import {categories} from '../../../constants';
 
 const drawerWidth = 240;
 
 const AppDrawer = () => {
-  const categories = ['Главная', 'Товары и услуги', 'Склады', 'Пользователи', 'Продажи'];
-
   return (
     <Drawer
       sx={{
         width: drawerWidth,
+        backgroundColor: 'red',
         flexShrink: 0,
         '& .MuiDrawer-paper': {
           width: drawerWidth,
