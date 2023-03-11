@@ -1,0 +1,5 @@
+djangorestframework-simplejwt
+djangorestframework
+django
+psycopg2-binary
+drf-yasg
