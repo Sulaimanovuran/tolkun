@@ -14,10 +14,11 @@ const Registration = () => {
     const error = useSelector(state => state.users.registerError);
 
     const [user, setUser] = useState({
-        displayName: '',
+        full_name: '',
         password: '',
+        password_confirm: '',
         email: '',
-        number: ''
+        phone_number: ''
     });
 
     useEffect(() => {
@@ -65,8 +66,8 @@ const Registration = () => {
                         type="email"
                     />
                     <InputField
-                        name="displayName"
-                        value={user.displayName}
+                        name="full_name"
+                        value={user.full_name}
                         onChange={onChange}
                         label="Имя компании"
                         required={true}
@@ -84,8 +85,18 @@ const Registration = () => {
                         margin="dense"
                     />
                     <InputField
-                      name="number"
-                      value={user.number}
+                      name="password_confirm"
+                      value={user.password_confirm}
+                      onChange={onChange}
+                      label="Подтверждение пароля"
+                      type="password"
+                      required={true}
+                      error={getFieldError('password')}
+                      margin="dense"
+                    />
+                    <InputField
+                      name="phone_number"
+                      value={user.phone_number}
                       onChange={onChange}
                       label="Номер телефона"
                       error={getFieldError('password')}
@@ -101,7 +112,7 @@ const Registration = () => {
                         variant="contained"
                         sx={{ mt: 2, mb: 2 }}
                     >
-                        Sign Up
+                        Зарегистрироваться
                     </LoadingButton>
                     <Grid container justifyContent={"flex-end"}>
                         <Grid item>

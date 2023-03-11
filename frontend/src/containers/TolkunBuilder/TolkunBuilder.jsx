@@ -1,18 +1,18 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Grid, Typography} from "@mui/material";
-import {fetchArtists} from "../../store/actions/artistsActions";
 import ArtistsList from "../../components/ArtistsList/ArtistsList";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import "../TolkunBuilder/TolkunBuilder.css"
+
 const TolkunBuilder = () => {
     const dispatch = useDispatch();
-    const artists = useSelector(state => state.artists.artists);
-    const loading = useSelector(state => state.artists.loading);
-    const user = useSelector(state => state.users.user);
+    // const artists = useSelector(state => state.artists.artists);
+    // const loading = useSelector(state => state.artists.loading);
+    // const user = useSelector(state => state.users.user);
 
     useEffect(() => {
-        dispatch(fetchArtists());
+        // dispatch(fetchArtists());
     }, [dispatch]);
 
     return (
@@ -22,11 +22,11 @@ const TolkunBuilder = () => {
                     <Typography variant="h5">
                        
                     </Typography>
-                    {artists.length < 1 &&
-                        <Typography variant="body">
-                        
-                    </Typography>
-                    }
+                    {/*{artists.length < 1 &&*/}
+                    {/*    <Typography variant="body">*/}
+                    {/*    */}
+                    {/*</Typography>*/}
+                    {/*}*/}
                 </Grid>
             </Grid>
             <div className='block_static'>
@@ -42,21 +42,21 @@ const TolkunBuilder = () => {
             </div>
             
             
-            {loading
-                ? <Spinner/>
-                : <div className="List">
-                    {artists.map(artist => (
-                        (artist.publish || (!artist.publish && artist.addedBy === user?._id)) &&
-                        <ArtistsList
-                            key={artist._id}
-                            id={artist._id}
-                            title={artist.title}
-                            image={artist.image}
-                            publish={artist.publish}
-                        />
-                    ))}
-                </div>
-            }
+            {/*{loading*/}
+            {/*    ? <Spinner/>*/}
+            {/*    : <div className="List">*/}
+                    {/*{artists.map(artist => (*/}
+                    {/*    (artist.publish || (!artist.publish && artist.addedBy === user?._id)) &&*/}
+                    {/*    <ArtistsList*/}
+                    {/*        key={artist._id}*/}
+                    {/*        id={artist._id}*/}
+                    {/*        title={artist.title}*/}
+                    {/*        image={artist.image}*/}
+                    {/*        publish={artist.publish}*/}
+                    {/*    />*/}
+                    {/*))}*/}
+            {/*    </div>*/}
+            {/*}*/}
         </Grid>
     );
 };
