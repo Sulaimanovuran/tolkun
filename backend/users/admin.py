@@ -8,4 +8,4 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Client)
 class UserCleint(admin.ModelAdmin):
-    list_display = ['__str__', 'email', 'phone_number']
+    list_display = ['__str__']

@@ -1,30 +1,27 @@
-from django.contrib.auth import get_user_model
-
+from rest_framework import generics
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializer import RegisterClientSerializer, LoginSerializer
+from rest_framework.viewsets import ModelViewSet
+from .models import User, Client
+from .serializers import *
 
-User = get_user_model()
 
-
-class RegisterApiView(APIView):
-    def post(self, request):
-        data = request.data
-        serializer = RegisterClientSerializer(data=data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            message = f'Success'
-            return Response(message, status=201)
+class RegisterClientAPIView(generics.ListCreateAPIView):
+    '''Регистрация ментора'''
+    queryset = User.objects.all()
+    serializer_class = RegisterClientSerializer
 
 
 class LoginApiView(ObtainAuthToken):
+    '''Авторизация'''
     serializer_class = LoginSerializer
 
 
 class LogOutApiView(APIView):
+    '''Выход из системы'''
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
@@ -32,6 +29,5 @@ class LogOutApiView(APIView):
             user = request.user
             Token.objects.filter(user=user).delete()
             return Response('Вы успешно разлогинились')
-        except:
+        except Exception as s:
             return Response(status=403)
-
