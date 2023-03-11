@@ -1,0 +1,33 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "todos": {
+    "id": 1,
+    "shelf_life": null,
+    "name": "cheese",
+    "count": 1,
+    "price": "100.0000",
+    "imgage": "http://127.0.0.1:8000/media/product_images/2023/03/11/drawing_2022-06-15_14-33-43.png",
+    "life": "YES",
+    "accessibility": false,
+    "warehouse": {
+      "id": 1,
+      "name": "test"
+    }
+  }
+}

@@ -1,9 +1,17 @@
 import { Grid, InputBase, Table, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 import {styled} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../Sales/Sales.css'
+import { useDispatch, useSelector } from 'react-redux';
+import UseTableSearch from '../../components/UI/Filter/useTableSearch';
+import { fetchAllProducts } from '../../store/actions/productsActions';
+import TableBody from '@mui/material/TableBody';
+import ProductEdit from '../../components/Modals/ProductEdit';
 function Sales() {
+
+  const dispatch = useDispatch();
+  const products = useSelector(state => state.products.allProducts);
 
     const [searchVal, setSearchVal] = useState('');
 
@@ -51,6 +59,17 @@ function Sales() {
         setSearchVal((e.target.value).trim());
       };
 
+      
+  const {filteredData} = UseTableSearch({
+    searchVal,
+    data: products
+});
+
+  useEffect(() => {
+    dispatch(fetchAllProducts());
+  }, [dispatch]);
+
+
   return (
     <div className='box_get'>
     <div className='product_box'>
@@ -88,6 +107,22 @@ function Sales() {
               <TableCell>Склад</TableCell>
             </TableRow>
           </TableHead>
+          <TableBody>
+            {filteredData.map((row) => (
+              <TableRow
+                key={row.name}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.name}
+                </TableCell>
+                <TableCell>{row.count}</TableCell>
+                <TableCell>{row.price}</TableCell>
+                <TableCell>{row.warehouse.name}</TableCell>
+                <ProductEdit id={row.id}/>
+              </TableRow>
+            ))}
+          </TableBody>
           </Table>
     </div>
     <div className='cart_box'></div>

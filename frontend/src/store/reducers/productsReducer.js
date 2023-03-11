@@ -9,7 +9,8 @@ import {
     FETCH_ALL_PRODUCTS_SUCCESS,
     FETCH_PRODUCT_FAILURE,
     FETCH_PRODUCT_REQUEST,
-    FETCH_PRODUCT_SUCCESS
+    FETCH_PRODUCT_SUCCESS,
+    FETCH_ALL_TODOS_SUCCESS
 
 } from "../actions/productsActions";
 
@@ -60,7 +61,8 @@ const productsReducer = (state = initialState, action) => {
 
         case CLEAR_PRODUCTS_ERRORS:
             return {...state, error: null, addError: null};
-
+        case FETCH_ALL_TODOS_SUCCESS : 
+        return {...state }
         default:
             return state;
     }
