@@ -19,6 +19,10 @@ class LoginApiView(ObtainAuthToken):
     '''Авторизация'''
     serializer_class = LoginSerializer
 
+    # def post(self, request):
+    #     print(request.data)
+    #     return Response(request.data,    status=200)
+
 
 class LogOutApiView(APIView):
     '''Выход из системы'''

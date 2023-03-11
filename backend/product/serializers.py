@@ -3,7 +3,6 @@ from .models import *
 
 
 class SerializerWharehouse(ModelSerializer):
-
     class Meta:
         model = Warehouse
         fields = "__all__"
