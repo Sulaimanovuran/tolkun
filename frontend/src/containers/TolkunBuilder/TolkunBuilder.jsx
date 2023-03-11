@@ -30,16 +30,17 @@ const TolkunBuilder = () => {
                 </Grid>
             </Grid>
             <div className='block_static'>
-            <div className='info_statistic1'>
-                <h1>coute</h1>
-                
+                <div className='info_statistic'>
+                    <p className='amount'>Кол-во товаров</p>
+                </div>
+                <div className='info_statistic'>
+                    <p className='amount'>Кол-во продаж</p></div>
+                <div className='info_statistic'><p className='amount'>Кол-во пользователей</p></div>
+                <div className='info_statistic'><p className='amount'>Кол-во складов</p></div>
             </div>
-            <div className='info_statistic1'>2</div>
-            <div className='info_statistic1'>3</div>
-            <div className='info_statistic1'>4</div>
            
             
-            </div>
+           
             
             
             {/*{loading*/}
