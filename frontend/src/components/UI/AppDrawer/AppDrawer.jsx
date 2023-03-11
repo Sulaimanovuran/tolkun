@@ -36,7 +36,7 @@ const AppDrawer = () => {
     >
       <Toolbar >
       <img width="50px" src={logo} alt="" />
-      <span className='span_logo' >Tolkun</span>
+      <span className='span_logo' >TOLKUN</span>
       </Toolbar>
       
       <Divider />
