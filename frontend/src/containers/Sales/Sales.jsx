@@ -1,19 +1,27 @@
 import { Grid, InputBase, Table, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 import {styled} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../Sales/Sales.css'
 import { useDispatch, useSelector } from 'react-redux';
 import UseTableSearch from '../../components/UI/Filter/useTableSearch';
 import { fetchAllProducts } from '../../store/actions/productsActions';
 import TableBody from '@mui/material/TableBody';
 import ProductEdit from '../../components/Modals/ProductEdit';
+import { todosContext } from '../../context/todosContext';
+
 function Sales() {
 
   const dispatch = useDispatch();
   const products = useSelector(state => state.products.allProducts);
 
     const [searchVal, setSearchVal] = useState('');
+
+    const {getTodos , todos} = useContext(todosContext)
+
+    useEffect(() => {
+      getTodos()
+    },[])
 
     const SearchStyle = styled('div')(({ theme }) => ({
         position: 'relative',
