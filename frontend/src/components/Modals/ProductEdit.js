@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import ProductModal from "./ProductModal";
 import TableCell from "@mui/material/TableCell";
 

@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
 import InputField from "../UI/Form/InputField/InputField";
-import {Grid} from "@mui/material";
+import {Box, Fade, Grid, Modal, Typography} from "@mui/material";
+import FileInput from "../UI/Form/FileInput/FileInput";
+import ButtonWithProgress from "../UI/Buttons/ButtonWithProgress/ButtonWithProgress";
+import AddButton from "../UI/Buttons/AddButton/AddButton";
+import EditButton from "../UI/Buttons/EditButton/EditButton";
 
 const style = {
   position: 'absolute',
@@ -15,11 +19,12 @@ const style = {
   overflow: 'auto',
   maxHeight: '600px',
 };
-const ProductModal = ({modalTitle, id, isAdd}) => {
+const ProductModal = ({modalTitle, isAdd}) => {
   const [newModal, setNewModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
 
   const [id, setId] = useState('');
+  let product;
 
   const [newData, setNewData] = useState({
     name: '',
@@ -118,13 +123,13 @@ const ProductModal = ({modalTitle, id, isAdd}) => {
     // }
   };
 
-    // const getFieldError = fieldName => {
-    //   try {
-    //     return isAdd ? newError.errors[fieldName].message : editError.errors[fieldName].message;
-    //   } catch {
-    //     return undefined;
-    //   }
-    // };
+    const getFieldError = fieldName => {
+      // try {
+      //   return isAdd ? newError.errors[fieldName].message : editError.errors[fieldName].message;
+      // } catch {
+      //   return undefined;
+      // }
+    };
 
   return (
     <>
@@ -201,8 +206,8 @@ const ProductModal = ({modalTitle, id, isAdd}) => {
 
                   <Grid item sx={{width: {xs: '100%', md: '49.5%'}}}>
                     <ButtonWithProgress
-                      loading={loading}
-                      disabled={loading}
+                      // loading={loading}
+                      // disabled={loading}
                       type="submit"
                       fullWidth
                       variant="contained"

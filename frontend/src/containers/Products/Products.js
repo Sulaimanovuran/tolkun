@@ -6,8 +6,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {ProductEdit} from '../../components/Modals/ProductEdit';
+import ProductEdit from '../../components/Modals/ProductEdit';
 import SearchIcon from "@mui/icons-material/Search";
+import {styled} from "@mui/material";
+import {Grid, Box, Typography, InputBase} from "@mui/material";
 
 const SearchStyle = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -35,6 +37,19 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'center',
 }));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '50%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
+  },
+}));
 const Products = () => {
   const a = [];
 
@@ -58,7 +73,7 @@ const Products = () => {
         justifyContent="space-between"
       >
         <Grid padding="15px">
-          <AddDriver/>
+          {/*<AddDriver/>*/}
         </Grid>
         <Grid
           sx={{
