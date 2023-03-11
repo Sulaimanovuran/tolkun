@@ -9,6 +9,8 @@ import Login from "./containers/Login/Login";
 import AddArtist from "./containers/AddArtist/AddArtist";
 import AddAlbum from "./containers/AddAlbum/AddAlbum";
 import AddTrack from "./containers/AddTrack/AddTrack";
+import Sales from './containers/Sales/Sales';
+
 
 const ProtectedRoute = ({isAllowed, redirectTo, ...props}) => {
     return isAllowed ?
@@ -26,6 +28,7 @@ const App = () => {
                 <Route path="/products" exact component={Products}/>
                 <Route path="/registration" component={Registration}/>
                 <Route path="/login" component={Login}/>
+                <Route path="/sales" component={Sales}/>
                 <ProtectedRoute
                     isAllowed={user}
                     redirectTo="/"

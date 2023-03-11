@@ -1,0 +1,12 @@
+.box_get {
+    display: flex;
+}
+.product_box {
+    width: 50%;
+    height: 100%;
+   border: 1px double black;
+}
+.cart_box {
+    width: 50%;
+    border: 1px double black;
+}
