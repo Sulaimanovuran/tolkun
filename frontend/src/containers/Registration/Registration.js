@@ -17,7 +17,7 @@ const Registration = () => {
         displayName: '',
         password: '',
         email: '',
-        avatarImage: ''
+        number: ''
     });
 
     useEffect(() => {
@@ -34,21 +34,9 @@ const Registration = () => {
         }));
     };
 
-    const onFileChange = e => {
-        const name = e.target.name;
-        const file = e.target.files[0];
-
-        setUser(prev => ({...prev, [name]: file}));
-    };
-
     const onSubmit = e => {
         e.preventDefault();
-
-        const formData = new FormData();
-        Object.keys(user).forEach(key => {
-            formData.append(key, user[key]);
-        });
-        dispatch(registerUser(formData));
+        dispatch(registerUser(user));
     };
 
     const getFieldError = fieldName => {
@@ -70,7 +58,7 @@ const Registration = () => {
                         name="email"
                         value={user.email}
                         onChange={onChange}
-                        label="Email"
+                        label="E-mail"
                         required={true}
                         error={getFieldError('email')}
                         margin="dense"
@@ -80,7 +68,7 @@ const Registration = () => {
                         name="displayName"
                         value={user.displayName}
                         onChange={onChange}
-                        label="Display Name"
+                        label="Имя компании"
                         required={true}
                         error={getFieldError('displayName')}
                         margin="dense"
@@ -89,20 +77,20 @@ const Registration = () => {
                         name="password"
                         value={user.password}
                         onChange={onChange}
-                        label="Password"
+                        label="Пароль"
                         type="password"
                         required={true}
                         error={getFieldError('password')}
                         margin="dense"
                     />
-                    <Box marginTop={1}>
-                        <FileInput
-                            name="avatarImage"
-                            onChange={onFileChange}
-                            label="Avatar"
-                            error={getFieldError('avatarImage')}
-                        />
-                    </Box>
+                    <InputField
+                      name="number"
+                      value={user.number}
+                      onChange={onChange}
+                      label="Номер телефона"
+                      error={getFieldError('password')}
+                      margin="dense"
+                    />
                     <LoadingButton
                         type="submit"
                         fullWidth
@@ -118,7 +106,7 @@ const Registration = () => {
                     <Grid container justifyContent={"flex-end"}>
                         <Grid item>
                             <Link to="/login">
-                                Already have an account? Sign in
+                                У вас уже есть аккаунт? Войти
                             </Link>
                         </Grid>
                     </Grid>

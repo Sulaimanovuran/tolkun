@@ -28,7 +28,7 @@ export const registerUser = userData => {
     return async dispatch => {
         try{
             dispatch(registerUserRequest());
-            await axiosApi.post('/users', userData);
+            await axiosApi.post('/register/client/', userData);
             dispatch(registerUserSuccess());
             dispatch(historyReplace('/login'));
             useToastInfo('Please login using new credentials!');
@@ -48,7 +48,7 @@ export const loginUser = userData => {
         try{
             dispatch(loginUserRequest());
 
-            const response = await axiosApi.post('/users/sessions', userData);
+            const response = await axiosApi.post('/login', userData);
             dispatch(loginUserSuccess(response.data));
             dispatch(historyPush('/'));
         } catch (e) {
@@ -57,19 +57,6 @@ export const loginUser = userData => {
             } else {
                 dispatch(loginUserFailure({global: 'No internet connection'}));
             }
-        }
-    };
-};
-
-export const facebookLogin = data => {
-    return async dispatch => {
-        try {
-            dispatch(loginUserRequest());
-            const response = await axiosApi.post('/users/facebookLogin', data);
-            dispatch(loginUserSuccess(response.data));
-            dispatch(historyPush('/'));
-        } catch (e) {
-            dispatch(loginUserFailure(e.response.data));
         }
     };
 };
