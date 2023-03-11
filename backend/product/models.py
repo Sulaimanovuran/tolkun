@@ -21,7 +21,7 @@ LIFE = [
 class Product(models.Model):
     name = models.CharField(max_length=200, verbose_name='Наименование: ')
     count = models.IntegerField(verbose_name='Количество товара: ')
-    price = models.DecimalField(max_digits=12, decimal_places=4, verbose_name='Цена товара: ')
+    price = models.DecimalField(max_digits=12, decimal_places=2, verbose_name='Цена товара: ')
     imgage = models.ImageField(upload_to='product_images/%Y/%m/%d/')
     life = models.CharField(max_length=50, choices=LIFE)
     shelf_life = models.DateTimeField(verbose_name='Срок годности: ', null=True, blank=True)

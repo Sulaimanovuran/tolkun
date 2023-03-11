@@ -13,6 +13,7 @@ import {Grid, Box, Typography, InputBase} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAllProducts} from "../../store/actions/productsActions";
 import ProductAdd from '../../components/Modals/ProductAdd';
+import useTableSearch from '../../components/UI/Filter/useTableSearch';
 
 const SearchStyle = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -57,13 +58,17 @@ const Products = () => {
   const dispatch = useDispatch();
   const products = useSelector(state => state.products.allProducts);
   const loading = useSelector(state => state.products.loading);
-  const a = [];
 
-  const [searchVal, setSearchVal] = useState('');
+  const [searchVal, setSearchVal] = useState(null);
 
   const searchValHandler = e => {
     setSearchVal((e.target.value).trim());
   };
+
+  const {filteredData} = useTableSearch({
+    searchVal,
+    data: products
+});
 
   useEffect(() => {
     dispatch(fetchAllProducts());
@@ -121,12 +126,12 @@ const Products = () => {
             <TableRow>
               <TableCell>Название</TableCell>
               <TableCell>Кол-во (шт)</TableCell>
-              <TableCell>Цена</TableCell>
+              <TableCell>Цена (с)</TableCell>
               <TableCell>Склад</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {a.map((row) => (
+            {filteredData.map((row) => (
               <TableRow
                 key={row.name}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -134,9 +139,9 @@ const Products = () => {
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
-                <TableCell>{row.calories}</TableCell>
-                <TableCell>{row.fat}</TableCell>
-                <TableCell>{row.carbs}</TableCell>
+                <TableCell>{row.count}</TableCell>
+                <TableCell>{row.price}</TableCell>
+                <TableCell>{row.warehouse.name}</TableCell>
                 <ProductEdit id={row.id}/>
               </TableRow>
             ))}

@@ -37,7 +37,7 @@ const UserMenu = ({user}) => {
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}
                 >
-                    Привет, {user.full_name}!
+                    Привет, {user.user_full_name}!
                 </Button>
             </Box>
 

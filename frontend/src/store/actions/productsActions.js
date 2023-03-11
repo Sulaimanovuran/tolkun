@@ -25,7 +25,7 @@ export const DELETE_PRODUCTS_FAILURE = 'DELETE_PRODUCTS_FAILURE';
 export const CLEAR_PRODUCTS_ERRORS = 'CLEAR_PRODUCTS_ERRORS';
 
 const fetchAllProductsRequest = () => ({type: FETCH_ALL_PRODUCTS_REQUEST});
-const fetchAllProductsSuccess = products => ({type: FETCH_ALL_PRODUCTS_FAILURE, payload: products});
+const fetchAllProductsSuccess = products => ({type: FETCH_ALL_PRODUCTS_SUCCESS, payload: products});
 const fetchAllProductsFailure = error => ({type: FETCH_ALL_PRODUCTS_FAILURE, payload: error});
 
 const fetchProductRequest = () => ({type: FETCH_PRODUCT_REQUEST});
@@ -52,6 +52,7 @@ export const fetchAllProducts = () => {
             dispatch(fetchAllProductsRequest());
 
             const response = await axiosApi('/product/api');
+            console.log(response);
             dispatch(fetchAllProductsSuccess(response.data));
         } catch (e) {
             dispatch(fetchAllProductsFailure(e.message));

@@ -60,7 +60,7 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
   });
 
   useEffect(() => {
-    dispatch(fetchProduct());
+    dispatch(fetchProduct(product_id));
   }, [dispatch]);
   
   useEffect(() => {
@@ -223,6 +223,7 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
                     <Grid item width={{xs: '100%', md: '49.5%'}}>
                       <InputField
                         name={'count'}
+                        type={'number'}
                         label={'Количество'}
                         value={isAdd ? newData.count : editedData.count}
                         required={true}
