@@ -6,7 +6,7 @@ const ProductEdit = ({id}) => (
     <TableCell>
       <ProductModal
         modalTitle={"Edit product"}
-        id={id}
+        product_id={id}
       />
     </TableCell>
 );

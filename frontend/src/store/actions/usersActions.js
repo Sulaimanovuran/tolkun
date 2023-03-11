@@ -48,7 +48,7 @@ export const loginUser = userData => {
         try{
             dispatch(loginUserRequest());
 
-            const response = await axiosApi.post('/login', userData);
+            const response = await axiosApi.post('/login/', userData);
             dispatch(loginUserSuccess(response.data));
             dispatch(historyPush('/'));
         } catch (e) {

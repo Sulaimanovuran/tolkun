@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,8 +10,9 @@ import ProductEdit from '../../components/Modals/ProductEdit';
 import SearchIcon from "@mui/icons-material/Search";
 import {styled} from "@mui/material";
 import {Grid, Box, Typography, InputBase} from "@mui/material";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {fetchAllProducts} from "../../store/actions/productsActions";
+import ProductAdd from '../../components/Modals/ProductAdd';
 
 const SearchStyle = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -54,6 +55,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 const Products = () => {
   const dispatch = useDispatch();
+  const products = useSelector(state => state.products.allProducts);
+  const loading = useSelector(state => state.products.loading);
   const a = [];
 
   const [searchVal, setSearchVal] = useState('');
@@ -80,7 +83,7 @@ const Products = () => {
         justifyContent="space-between"
       >
         <Grid padding="15px">
-          {/*<AddDriver/>*/}
+          <ProductAdd/>
         </Grid>
         <Grid
           sx={{
@@ -117,7 +120,7 @@ const Products = () => {
           <TableHead>
             <TableRow>
               <TableCell>Название</TableCell>
-              <TableCell>Кол-во</TableCell>
+              <TableCell>Кол-во (шт)</TableCell>
               <TableCell>Цена</TableCell>
               <TableCell>Склад</TableCell>
             </TableRow>

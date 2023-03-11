@@ -1,6 +1,9 @@
 import {
     ADD_PRODUCT_FAILURE,
-    ADD_PRODUCT_REQUEST, ADD_PRODUCT_SUCCESS, DELETE_PRODUCTS_FAILURE, DELETE_PRODUCTS_REQUEST, DELETE_PRODUCTS_SUCCESS,
+    ADD_PRODUCT_REQUEST, ADD_PRODUCT_SUCCESS, CLEAR_PRODUCTS_ERRORS, DELETE_PRODUCTS_FAILURE, DELETE_PRODUCTS_REQUEST, DELETE_PRODUCTS_SUCCESS,
+    EDIT_PRODUCT_FAILURE,
+    EDIT_PRODUCT_REQUEST,
+    EDIT_PRODUCT_SUCCESS,
     FETCH_ALL_PRODUCTS_FAILURE,
     FETCH_ALL_PRODUCTS_REQUEST,
     FETCH_ALL_PRODUCTS_SUCCESS,
@@ -15,7 +18,6 @@ const initialState = {
     product: [],
     loading: false,
     error: null,
-    addLoading: false,
     addError: null
 };
 
@@ -36,11 +38,18 @@ const productsReducer = (state = initialState, action) => {
             return {...state, loading: false, error: action.payload};
 
         case ADD_PRODUCT_REQUEST:
-            return {...state, addError: null, addLoading: true};
+            return {...state, addError: null, loading: true};
         case ADD_PRODUCT_SUCCESS:
-            return {...state, addLoading: false};
+            return {...state, loading: false};
         case ADD_PRODUCT_FAILURE:
-            return {...state, addError: action.payload, addLoading: false};
+            return {...state, addError: action.payload, loading: false};
+
+        case EDIT_PRODUCT_REQUEST:
+            return {...state, error: null, loading: true};
+        case EDIT_PRODUCT_SUCCESS:
+            return {...state, loading: false};
+        case EDIT_PRODUCT_FAILURE:
+            return {...state, error: action.payload, loading: false};
 
         case DELETE_PRODUCTS_REQUEST:
             return {...state, error: null, loading: true};
@@ -48,6 +57,10 @@ const productsReducer = (state = initialState, action) => {
             return {...state, loading: false};
         case DELETE_PRODUCTS_FAILURE:
             return {...state, error: action.payload, loading: false};
+
+        case CLEAR_PRODUCTS_ERRORS:
+            return {...state, error: null, addError: null};
+
         default:
             return state;
     }

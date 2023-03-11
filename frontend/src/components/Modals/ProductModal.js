@@ -1,10 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import InputField from "../UI/Form/InputField/InputField";
-import {Box, Fade, Grid, Modal, Typography} from "@mui/material";
+import {Box, Fade, Grid, Modal, Typography, TextField} from "@mui/material";
 import FileInput from "../UI/Form/FileInput/FileInput";
 import ButtonWithProgress from "../UI/Buttons/ButtonWithProgress/ButtonWithProgress";
 import AddButton from "../UI/Buttons/AddButton/AddButton";
 import EditButton from "../UI/Buttons/EditButton/EditButton";
+import { addProduct, clearProductsErrors, editProduct, fetchProduct } from '../../store/actions/productsActions';
+import { useDispatch, useSelector } from 'react-redux';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 
 const style = {
   position: 'absolute',
@@ -19,73 +25,84 @@ const style = {
   overflow: 'auto',
   maxHeight: '600px',
 };
-const ProductModal = ({modalTitle, isAdd}) => {
+const ProductModal = ({modalTitle, product_id, isAdd}) => {
+  const dispatch = useDispatch();
   const [newModal, setNewModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
 
   const [id, setId] = useState('');
-  let product;
+  const product = useSelector(state => state.products.product);
+  const products = useSelector(state => state.products.products);
+  const newError = useSelector(state => state.products.addError);
+  const editError = useSelector(state => state.products.error );
+  const loading = useSelector(state => state.products.loading );
+
+  const [date, setDate] = useState(null);
 
   const [newData, setNewData] = useState({
     name: '',
-    amount: '',
+    count: '',
     price: '',
     warehouse: '',
     shelf_life: '',
-    image: ''
+    accessibility: '',
+    imgage: ''
   });
 
   const [editedData, setEditedData] = useState({
     name: '',
-    amount: '',
+    count: '',
     price: '',
     warehouse: '',
     shelf_life: '',
-    image: ''
+    accessibility: '',
+    imgage: ''
   });
 
-  // useEffect(() => {
-  //   dispatch(fetchCarriersRequest());
-  // }, [dispatch]);
-  //
-  // useEffect(() => {
-  //   if (newError === null) {
-  //     setNewModal(false);
-  //   }
-  //   if (editError === null) {
-  //     setEditModal(false);
-  //   }
-  //   // eslint-disable-next-line
-  // }, [drivers]);
+  useEffect(() => {
+    dispatch(fetchProduct());
+  }, [dispatch]);
+  
+  useEffect(() => {
+    if (newError === null) {
+      setNewModal(false);
+    }
+    if (editError === null) {
+      setEditModal(false);
+    }
+    // eslint-disable-next-line
+  }, [product]);
 
   const openCloseModal = id => {
     if (isAdd) {
       setNewData({
         name: '',
-        amount: '',
+        count: '',
         price: '',
         warehouse: '',
         shelf_life: '',
-        image: ''
+        accessibility: '',
+        imgage: ''
       });
 
       setNewModal(true);
-      // dispatch(clearDriverErrors());
+      dispatch(clearProductsErrors());
     } else if (!isAdd) {
-      // const product = drivers.filter(item => item.email === driverEmail)[0];
-      // setDriverId(driver._id);
+      const product = products.find(item => item.id === product_id);
+      setId(product.id);
 
       setEditedData({
         name: product.name,
-        amount: product.amount,
+        count: product.count,
         price: product.price,
         warehouse: product.warehouse,
         shelf_life: product.shelf_life,
-        image: product.image
+        accessibilty: product.accessibility,
+        imgage: product.imgage
       });
 
       setEditModal(true);
-      // dispatch(clearDriverErrors());
+      dispatch(clearProductsErrors());
     }
   };
 
@@ -116,19 +133,19 @@ const ProductModal = ({modalTitle, isAdd}) => {
       formData.append(key, isAdd ? newData[key] : editedData[key]);
     });
 
-    // if (isAdd) {
-    //   dispatch(addDriverRequest({data: formData}));
-    // } else {
-    //   dispatch(updateDriverRequest({id: driverId, data: formData, user}));
-    // }
+    if (isAdd) {
+      dispatch(addProduct({data: formData}));
+    } else {
+      dispatch(editProduct({id, data: formData}));
+    }
   };
 
     const getFieldError = fieldName => {
-      // try {
-      //   return isAdd ? newError.errors[fieldName].message : editError.errors[fieldName].message;
-      // } catch {
-      //   return undefined;
-      // }
+      try {
+        return isAdd ? newError.errors[fieldName].message : editError.errors[fieldName].message;
+      } catch {
+        return undefined;
+      }
     };
 
   return (
@@ -165,6 +182,13 @@ const ProductModal = ({modalTitle, isAdd}) => {
                   onSubmit={submitFormHandler}
                   pr={'15px'}
                 >
+                  <Grid item xs={12}>
+                    <FileInput
+                      label='Рисунок'
+                      name='imgage'
+                      onChange={fileChangeHandler}
+                    />
+                  </Grid>
                   <Grid
                     item
                     container
@@ -186,34 +210,68 @@ const ProductModal = ({modalTitle, isAdd}) => {
 
                     <Grid item width={{xs: '100%', md: '49.5%'}}>
                       <InputField
-                        name={'amount'}
+                        type={'number'}
+                        name={'price'}
+                        label={'Цена'}
+                        value={isAdd ? newData.price : editedData.price}
+                        required={true}
+                        onChange={inputChangeHandler}
+                        error={getFieldError('price')}
+                      />
+                    </Grid>
+
+                    <Grid item width={{xs: '100%', md: '49.5%'}}>
+                      <InputField
+                        name={'count'}
                         label={'Количество'}
+                        value={isAdd ? newData.count : editedData.count}
+                        required={true}
+                        onChange={inputChangeHandler}
+                        error={getFieldError('amount')}
+                      />
+                    </Grid>
+
+                    <Grid item width={{xs: '100%', md: '49.5%'}}>
+                      <InputField
+                        name={'accessibility'}
+                        label={'Наличие'}
+                        value={isAdd ? newData.accessibility : editedData.accessibility}
+                        required={true}
+                        onChange={inputChangeHandler}
+                        error={getFieldError('accessibility')}
+                      />
+                    </Grid>
+                    <Grid item width={{xs: '100%', md: '49.5%'}}>
+                      <InputField
+                        name={'warehouse'}
+                        label={'Склад'}
                         value={isAdd ? newData.amount : editedData.amount}
                         required={true}
                         onChange={inputChangeHandler}
                         error={getFieldError('amount')}
                       />
                     </Grid>
-                  </Grid>
 
-                  <Grid item xs={12}>
-                    <FileInput
-                      label='License'
-                      name='license'
-                      onChange={fileChangeHandler}
-                    />
-                  </Grid>
+                    </Grid>
+
+                    
+
+                    {/* <Grid item width={{xs: '100%', md: '49.5%'}}>
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker />
+                      </LocalizationProvider>
+                    </Grid> */}
 
                   <Grid item sx={{width: {xs: '100%', md: '49.5%'}}}>
                     <ButtonWithProgress
-                      // loading={loading}
-                      // disabled={loading}
+                      loading={loading}
+                      disabled={loading}
                       type="submit"
                       fullWidth
                       variant="contained"
                       color="primary"
                     >
-                      Save
+                      Сохранить
                     </ButtonWithProgress>
                   </Grid>
 
@@ -225,7 +283,7 @@ const ProductModal = ({modalTitle, isAdd}) => {
                       color="primary"
                       onClick={() => isAdd ? setNewModal(false) : setEditModal(false)}
                     >
-                      Cancel
+                      Отмена
                     </ButtonWithProgress>
                   </Grid>
                 </Grid>

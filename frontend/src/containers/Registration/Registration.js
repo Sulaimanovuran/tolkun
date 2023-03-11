@@ -6,7 +6,6 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {useDispatch, useSelector} from "react-redux";
 import {clearRegisterErrors, registerUser} from "../../store/actions/usersActions";
 import InputField from "../../components/UI/Form/InputField/InputField";
-import FileInput from "../../components/UI/Form/FileInput/FileInput";
 
 const Registration = () => {
     const dispatch = useDispatch();

@@ -14,9 +14,15 @@ export const ADD_PRODUCT_REQUEST = 'ADD_PRODUCT_REQUEST';
 export const ADD_PRODUCT_SUCCESS = 'ADD_PRODUCT_SUCCESS';
 export const ADD_PRODUCT_FAILURE = 'ADD_PRODUCT_FAILURE';
 
+export const EDIT_PRODUCT_REQUEST = 'EDIT_PRODUCT_REQUEST';
+export const EDIT_PRODUCT_SUCCESS = 'EDIT_PRODUCT_SUCCESS';
+export const EDIT_PRODUCT_FAILURE = 'EDIT_PRODUCT_FAILURE';
+
 export const DELETE_PRODUCTS_REQUEST = 'DELETE_PRODUCTS_REQUEST';
 export const DELETE_PRODUCTS_SUCCESS = 'DELETE_PRODUCTS_SUCCESS';
 export const DELETE_PRODUCTS_FAILURE = 'DELETE_PRODUCTS_FAILURE';
+
+export const CLEAR_PRODUCTS_ERRORS = 'CLEAR_PRODUCTS_ERRORS';
 
 const fetchAllProductsRequest = () => ({type: FETCH_ALL_PRODUCTS_REQUEST});
 const fetchAllProductsSuccess = products => ({type: FETCH_ALL_PRODUCTS_FAILURE, payload: products});
@@ -30,9 +36,15 @@ const addProductRequest = () => ({type: ADD_PRODUCT_REQUEST});
 const addProductSuccess = () => ({type: ADD_PRODUCT_SUCCESS});
 const addProductFailure = error => ({type: ADD_PRODUCT_FAILURE, payload: error});
 
+const editProductRequest = () => ({type: EDIT_PRODUCT_REQUEST});
+const editProductSuccess = () => ({type: EDIT_PRODUCT_SUCCESS});
+const editProductFailure = error => ({type: EDIT_PRODUCT_FAILURE, payload: error});
+
 const deleteProductsRequest = () => ({type: DELETE_PRODUCTS_REQUEST});
 const deleteProductsSuccess = () => ({type: DELETE_PRODUCTS_SUCCESS});
 const deleteProductsFailure = error => ({type: DELETE_PRODUCTS_FAILURE, payload: error});
+
+export const clearProductsErrors = () => ({type: CLEAR_PRODUCTS_ERRORS});
 
 export const fetchAllProducts = () => {
     return async dispatch => {
@@ -74,6 +86,26 @@ export const addProduct = data => {
                 dispatch(addProductFailure(e.response.data));
             } else {
                 dispatch(addProductFailure({global: 'Проверьте интернет'}));
+            }
+            throw e;
+        }
+    };
+};
+
+export const editProduct = data => {
+    return async dispatch => {
+        try{
+            dispatch(editProductRequest());
+
+            await axiosApi.put('/product/api/', data);
+            dispatch(editProductSuccess());
+            dispatch(historyReplace('/'));
+            useToastSuccess('Продукт удачно изменен!');
+        } catch (e) {
+            if (e.response && e.response.data) {
+                dispatch(editProductFailure(e.response.data));
+            } else {
+                dispatch(editProductFailure({global: 'Проверьте интернет'}));
             }
             throw e;
         }

@@ -8,6 +8,7 @@
     "@mui/icons-material": "^5.10.6",
     "@mui/lab": "^5.0.0-alpha.100",
     "@mui/material": "^5.10.6",
+    "@mui/x-date-pickers": "^6.0.1",
     "axios": "^0.27.2",
     "history": "^4.10.1",
     "prop-types": "^15.8.1",
