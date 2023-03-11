@@ -83,6 +83,7 @@ export const addProduct = data => {
             dispatch(addProductRequest());
 
             await axiosApi.post('/product/api/', data);
+            console.log(data);
             dispatch(addProductSuccess());
             dispatch(historyReplace('/'));
             useToastSuccess('Продукт удачно добавлен!');

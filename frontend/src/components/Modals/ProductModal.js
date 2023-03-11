@@ -7,6 +7,7 @@ import AddButton from "../UI/Buttons/AddButton/AddButton";
 import EditButton from "../UI/Buttons/EditButton/EditButton";
 import { addProduct, clearProductsErrors, editProduct, fetchProduct } from '../../store/actions/productsActions';
 import { useDispatch, useSelector } from 'react-redux';
+import FormSelect from '../UI/Form/FormSelect/FormSelect';
 // import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 // import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 // import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -46,7 +47,8 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
     warehouse: '',
     shelf_life: '',
     accessibility: '',
-    imgage: ''
+    imgage: '',
+    life: ''
   });
 
   const [editedData, setEditedData] = useState({
@@ -56,12 +58,15 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
     warehouse: '',
     shelf_life: '',
     accessibility: '',
-    imgage: ''
+    imgage: '',
+    life: ''
   });
 
   useEffect(() => {
-    dispatch(fetchProduct(product_id));
-  }, [dispatch]);
+    if (product_id) {
+          dispatch(fetchProduct(product_id));
+    }
+  }, [dispatch, product_id]);
   
   useEffect(() => {
     if (newError === null) {
@@ -82,7 +87,8 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
         warehouse: '',
         shelf_life: '',
         accessibility: '',
-        imgage: ''
+        imgage: '',
+        life: ''
       });
 
       setNewModal(true);
@@ -98,7 +104,8 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
         warehouse: product.warehouse,
         shelf_life: product.shelf_life,
         accessibilty: product.accessibility,
-        imgage: product.imgage
+        imgage: product.imgage,
+        life: product.life
       });
 
       setEditModal(true);
@@ -142,7 +149,7 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
 
     const getFieldError = fieldName => {
       try {
-        return isAdd ? newError.errors[fieldName].message : editError.errors[fieldName].message;
+        return isAdd ? newError[fieldName][0] : editError[fieldName][0];
       } catch {
         return undefined;
       }
@@ -252,6 +259,14 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
                         error={getFieldError('amount')}
                       />
                     </Grid>
+                    <FormSelect
+                        onChange={inputChangeHandler}
+                        name='life'
+                        options={[{id: 'NOT', title: 'NOT'}, {id: 'YES', title: 'YES'}]}
+                        label='Наличие срока годности'
+                        value={isAdd ? newData.life : editedData.life}
+                        error={getFieldError('life')}
+                    />
 
                     </Grid>
 
