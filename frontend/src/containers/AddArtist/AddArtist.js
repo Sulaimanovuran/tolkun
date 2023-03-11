@@ -3,7 +3,7 @@ import {Grid, Typography} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {addArtist} from "../../store/actions/artistsActions";
 import InputField from "../../components/UI/Form/InputField/InputField";
-import ButtonWithProgress from "../../components/UI/ButtonWithProgress/ButtonWithProgress";
+import ButtonWithProgress from "../../components/UI/Buttons/ButtonWithProgress/ButtonWithProgress";
 import FileInput from "../../components/UI/Form/FileInput/FileInput";
 
 const AddArtist = () => {

@@ -5,7 +5,7 @@ import {addTrack} from "../../store/actions/tracksActions";
 import FormSelect from "../../components/UI/Form/FormSelect/FormSelect";
 import {fetchAlbums} from "../../store/actions/albumsActions";
 import InputField from "../../components/UI/Form/InputField/InputField";
-import ButtonWithProgress from "../../components/UI/ButtonWithProgress/ButtonWithProgress";
+import ButtonWithProgress from "../../components/UI/Buttons/ButtonWithProgress/ButtonWithProgress";
 import {fetchArtists} from "../../store/actions/artistsActions";
 
 const AddTrack = () => {

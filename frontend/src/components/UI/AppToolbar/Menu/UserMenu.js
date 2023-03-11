@@ -3,20 +3,10 @@ import {Box, Button, Menu} from "@mui/material";
 import {Link} from "react-router-dom";
 import MenuItem from '@mui/material/MenuItem';
 import {useDispatch} from "react-redux";
-import Avatar from '@mui/material/Avatar';
-import { deepPurple } from '@mui/material/colors';
 import {logoutUser} from "../../../../store/actions/usersActions";
-import {apiUrl} from "../../../../config";
 
 const UserMenu = ({user}) => {
     const dispatch = useDispatch();
-
-    let avatar;
-    if (user.avatarImage && user.facebookId) {
-        avatar = user.avatarImage;
-    } else {
-        avatar = apiUrl + '/' + user.avatarImage;
-    }
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -47,12 +37,8 @@ const UserMenu = ({user}) => {
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}
                 >
-                    Hello, {user.displayName}!
+                    Привет, {user.displayName}!
                 </Button>
-                <Avatar
-                    alt={user.displayName.toUpperCase()}
-                    src={avatar}
-                    sx={{marginLeft: '5px', marginBottom: '5px', bgcolor: deepPurple[500]}}/>
             </Box>
 
             <Menu

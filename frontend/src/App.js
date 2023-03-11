@@ -3,7 +3,7 @@ import {Redirect, Route, Switch} from "react-router-dom";
 import {useSelector} from "react-redux";
 import TolkunBuilder from "./containers/MusicAppBuilder/TolkunBuilder";
 import Layout from "./components/UI/Layout/Layout";
-import AlbumsPage from "./containers/AlbumsPage/AlbumsPage";
+import Products from "./containers/Products/Products";
 import Registration from "./containers/Registration/Registration";
 import Login from "./containers/Login/Login";
 import AddArtist from "./containers/AddArtist/AddArtist";
@@ -23,7 +23,7 @@ const App = () => {
         <Layout>
             <Switch>
                 <Route path="/" exact component={TolkunBuilder}/>
-                <Route path="/albums" exact component={AlbumsPage}/>
+                <Route path="/products" exact component={Products}/>
                 <Route path="/registration" component={Registration}/>
                 <Route path="/login" component={Login}/>
                 <ProtectedRoute
