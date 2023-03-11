@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState , useEffect} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,6 +10,8 @@ import ProductEdit from '../../components/Modals/ProductEdit';
 import SearchIcon from "@mui/icons-material/Search";
 import {styled} from "@mui/material";
 import {Grid, Box, Typography, InputBase} from "@mui/material";
+import {useDispatch} from "react-redux";
+import {fetchAllProducts} from "../../store/actions/productsActions";
 
 const SearchStyle = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -51,6 +53,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 const Products = () => {
+  const dispatch = useDispatch();
   const a = [];
 
   const [searchVal, setSearchVal] = useState('');
@@ -58,6 +61,10 @@ const Products = () => {
   const searchValHandler = e => {
     setSearchVal((e.target.value).trim());
   };
+
+  useEffect(() => {
+    dispatch(fetchAllProducts());
+  }, [dispatch]);
 
   return (
     <Box>
@@ -89,7 +96,7 @@ const Products = () => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search"
+              placeholder="Поиск..."
               inputProps={{ 'aria-label': 'search' }}
               onChange={searchValHandler}
             />

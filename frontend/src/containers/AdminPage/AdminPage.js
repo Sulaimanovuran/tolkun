@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {deleteArtist, fetchArtists, publishArtist} from "../../store/actions/artistsActions";
-import {deleteAlbum, fetchAllAlbums, publishAlbum} from "../../store/actions/albumsActions";
+import {deleteAlbum, fetchAllAlbums, publishAlbum} from "../../store/actions/productsActions";
 import {deleteTrack, fetchAllTracks, publishTrack} from "../../store/actions/tracksActions";
 import AdminPageArtists from "../../components/AdminPageArtists/AdminPageArtists";
 import {Typography} from "@mui/material";
