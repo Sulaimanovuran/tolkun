@@ -22,6 +22,8 @@ export const DELETE_PRODUCTS_REQUEST = 'DELETE_PRODUCTS_REQUEST';
 export const DELETE_PRODUCTS_SUCCESS = 'DELETE_PRODUCTS_SUCCESS';
 export const DELETE_PRODUCTS_FAILURE = 'DELETE_PRODUCTS_FAILURE';
 
+export const FETCH_ALL_TODOS_SUCCESS = "FETCH_ALL_TODOS_SUCCESS"
+
 export const CLEAR_PRODUCTS_ERRORS = 'CLEAR_PRODUCTS_ERRORS';
 
 const fetchAllProductsRequest = () => ({type: FETCH_ALL_PRODUCTS_REQUEST});
@@ -43,6 +45,8 @@ const editProductFailure = error => ({type: EDIT_PRODUCT_FAILURE, payload: error
 const deleteProductsRequest = () => ({type: DELETE_PRODUCTS_REQUEST});
 const deleteProductsSuccess = () => ({type: DELETE_PRODUCTS_SUCCESS});
 const deleteProductsFailure = error => ({type: DELETE_PRODUCTS_FAILURE, payload: error});
+
+const fetchAllTodosSuccess = products => ({type: FETCH_ALL_TODOS_SUCCESS, payload: products});
 
 export const clearProductsErrors = () => ({type: CLEAR_PRODUCTS_ERRORS});
 

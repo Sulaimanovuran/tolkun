@@ -6,14 +6,17 @@ import App from './App';
 import history from "./history";
 import store from "./store/configureStore";
 import './index.css';
+import TodosContextProvider from './context/todosContext';
 
 
 const app = (
+      <TodosContextProvider>
     <Provider store={store}>
-        <Router history={history}>
+            <Router history={history}>
             <App/>
-        </Router>
+        </Router>   
     </Provider>
+    </TodosContextProvider>
 );
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

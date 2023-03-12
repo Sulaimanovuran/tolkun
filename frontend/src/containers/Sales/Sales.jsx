@@ -1,11 +1,31 @@
-import { Grid, InputBase, Table, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { Button, Grid, InputBase, Table, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 import {styled} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../Sales/Sales.css'
+import { useDispatch, useSelector } from 'react-redux';
+import UseTableSearch from '../../components/UI/Filter/useTableSearch';
+import { fetchAllProducts } from '../../store/actions/productsActions';
+import TableBody from '@mui/material/TableBody';
+import ProductEdit from '../../components/Modals/ProductEdit';
+import { todosContext } from '../../context/todosContext';
+
 function Sales() {
 
+  const dispatch = useDispatch();
+  const products = useSelector(state => state.products.allProducts);
+
     const [searchVal, setSearchVal] = useState('');
+  
+    
+    const {getTodos , todos , addTodos} = useContext(todosContext)
+   
+   const handeleAddClick = () => {
+    addTodos()
+   }
+
+   
+     
 
     const SearchStyle = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -51,9 +71,23 @@ function Sales() {
         setSearchVal((e.target.value).trim());
       };
 
+      
+  const {filteredData} = UseTableSearch({
+    searchVal,
+    data: products
+});
+
+  useEffect(() => {
+    getTodos()
+    dispatch(fetchAllProducts());
+  }, [dispatch]);
+
+  
+
   return (
     <div className='box_get'>
     <div className='product_box'>
+      
     <Grid item sx={{paddingLeft: "15px"}}>
         <Typography variant="h5" fontWeight="bold" textTransform="uppercase">
           Товары и услуги
@@ -88,9 +122,51 @@ function Sales() {
               <TableCell>Склад</TableCell>
             </TableRow>
           </TableHead>
+          <TableBody>
+            
+            {/* {filteredData.map((row) => (
+              <TableRow
+                key={row.name}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.name}
+                </TableCell>
+                <TableCell>{row.count}</TableCell>
+                <TableCell>{row.price}</TableCell>
+                <TableCell>{row.warehouse.name}</TableCell>
+                <ProductEdit id={row.id}/>
+              </TableRow>
+            ))}
+             */}
+
+{ todos.data ? todos.data.map((todo) => {
+     return (
+     <div key={todo.id} className='card_product'> 
+      <span>{todo.name}</span>
+      <span>{todo.price}</span>
+      <span>{todo.count}</span>
+      <span>{todo.life}</span>
+      <img className='product_img' width="200px" height="200px" src={todo.imgage? todo.imgage : "https://rosservice-t.ru/wp-content/uploads/2021/04/a7925-1.jpg"} alt="" />
+      {/* <button className='btn' onClick={handeleAddClick} >+</button> */}
+     </div>
+     )
+      }) : ""}
+          </TableBody>
           </Table>
     </div>
-    <div className='cart_box'></div>
+    <div className='cart_box'>
+    { todos.data ? todos.data.map((todo) => {
+     return (
+     <div key={todo.id} className='card_product'> 
+      <span>{todo.name}</span>
+      <span>{todo.price}</span>
+      <span>{todo.count}</span>
+      <span>{todo.life}</span>
+      <img className='product_img' src={todo.imgage} width="200px" height="200px" alt="" />
+     </div> 
+     ) } ) : "" }
+    </div>
     </div>
   )
 }

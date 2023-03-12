@@ -1,0 +1,68 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "todos": [
+    {
+      "id": 1,
+      "shelf_life": null,
+      "name": "MackBook",
+      "count": 1,
+      "price": "80000",
+      "imgage": "https://enter.kg/images/stories/virtuemart/product/1_2528_7462.jpg",
+      "life": "YES",
+      "accessibility": false
+      
+    },
+    {
+      "id": 2,
+      "shelf_life": null,
+      "name": "AsusRog Strix",
+      "count": 1,
+      "price": "200000",
+      "imgage": "https://login.kg/image/cache/catalog/new/Notebook/Asus/ROG%20Strix%20Scar%2015/1-500x500.jpg",
+      "life": "YES",
+      "accessibility": false
+      
+    },
+
+    {
+      "id": 3,
+      "shelf_life": null,
+      "name": "Ноутбук Lenovo Legion 5 15 Gaming Laptop",
+      "count": 1,
+      "price": "150000",
+      "imgage": "https://login.kg/image/cache/catalog/new/Notebook/Lenovo/%20Legion%205/1a-500x500.jpg",
+      "life": "YES",
+      "accessibility": false
+      
+    },{
+      "id": 4,
+      "shelf_life": null,
+      "name": "Ноутбук MSI GL66 ",
+      "count": 1,
+      "price": "140000",
+      "imgage": "https://elmaster.olo.kg/wp-content/uploads/2022/03/MSI-REMONT.jpg",
+      "life": "YES",
+      "accessibility": false
+      
+    }
+    
+    
+    
+  ]
+}
