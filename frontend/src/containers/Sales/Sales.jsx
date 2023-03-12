@@ -88,7 +88,7 @@ function Sales() {
       
     <Grid item sx={{paddingLeft: "15px"}}>
         <Typography variant="h5" fontWeight="bold" textTransform="uppercase">
-          Товары и услуги
+          Продажи
         </Typography>
       </Grid>
       <Grid
@@ -121,25 +121,8 @@ function Sales() {
             </TableRow>
           </TableHead>
           <TableBody>
-            
-            {/* {filteredData.map((row) => (
-              <TableRow
-                key={row.name}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell>{row.count}</TableCell>
-                <TableCell>{row.price}</TableCell>
-                <TableCell>{row.warehouse.name}</TableCell>
-                <ProductEdit id={row.id}/>
-              </TableRow>
-            ))}
-             */}
 
-{ todos.data ? todos.data.map((todo) => {
-     return (
+{ todos.data && todos.data.map((todo) => (
      <div key={todo.id} className='card_product'> 
       <span>{todo.name}</span>
       <span>{todo.price}</span>
@@ -148,14 +131,12 @@ function Sales() {
       <img className='product_img' width="200px" height="200px" src={todo.imgage? todo.imgage : "https://rosservice-t.ru/wp-content/uploads/2021/04/a7925-1.jpg"} alt="" />
       {/* <button className='btn' onClick={handeleAddClick} >+</button> */}
      </div>
-     )
-      }) : ""}
+))}
           </TableBody>
           </Table>
     </div>
     <div className='cart_box'>
-    { todos.data ? todos.data.map((todo) => {
-     return (
+    { todos.data && todos.data.map((todo) => (
      <div key={todo.id} className='card_product'> 
       <span>{todo.name}</span>
       <span>{todo.price}</span>
@@ -163,7 +144,7 @@ function Sales() {
       <span>{todo.life}</span>
       <img className='product_img' src={todo.imgage} width="200px" height="200px" alt="" />
      </div> 
-     ) } ) : "" }
+     ) )}
     </div>
     </div>
   )

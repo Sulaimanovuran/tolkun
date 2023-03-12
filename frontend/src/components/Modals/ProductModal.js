@@ -247,7 +247,7 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
                       <InputField
                         name={'warehouse'}
                         label={'Склад'}
-                        value={isAdd ? newData.amount : editedData.amount}
+                        value={isAdd ? newData.warehouse : editedData.warehouse}
                         onChange={inputChangeHandler}
                         error={getFieldError('amount')}
                       />

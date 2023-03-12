@@ -14,7 +14,6 @@ const MenuButton = ({id, deleteProduct}) => {
     setAnchorEl(null);
   };
 
-
   return (
     <div>
       <IconButton
@@ -36,7 +35,7 @@ const MenuButton = ({id, deleteProduct}) => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={() => [handleClose()]}>
+        <MenuItem onClick={() => handleClose()}>
           <ProductEdit id={id}/>
         </MenuItem>
         <MenuItem onClick={() => [deleteProduct(id), handleClose()]}>
