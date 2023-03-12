@@ -193,7 +193,6 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
                           name={'name'}
                           label={'Название'}
                           value={isAdd ? newData.name : editedData.name}
-                          required={true}
                           onChange={inputChangeHandler}
                           error={getFieldError('name')}
                         />
@@ -204,7 +203,6 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
                           name={'price'}
                           label={'Цена'}
                           value={isAdd ? newData.price : editedData.price}
-                          required={true}
                           onChange={inputChangeHandler}
                           error={getFieldError('price')}
                         />
@@ -231,7 +229,6 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
                         type={'number'}
                         label={'Количество'}
                         value={isAdd ? newData.count : editedData.count}
-                        required={true}
                         onChange={inputChangeHandler}
                         error={getFieldError('amount')}
                       />
@@ -242,7 +239,6 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
                         name={'accessibility'}
                         label={'Наличие'}
                         value={isAdd ? newData.accessibility : editedData.accessibility}
-                        required={true}
                         onChange={inputChangeHandler}
                         error={getFieldError('accessibility')}
                       />
@@ -252,7 +248,6 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
                         name={'warehouse'}
                         label={'Склад'}
                         value={isAdd ? newData.amount : editedData.amount}
-                        required={true}
                         onChange={inputChangeHandler}
                         error={getFieldError('amount')}
                       />

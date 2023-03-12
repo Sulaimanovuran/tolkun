@@ -1,15 +1,10 @@
 import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {Grid, Typography} from "@mui/material";
-import ArtistsList from "../../components/ArtistsList/ArtistsList";
-import Spinner from "../../components/UI/Spinner/Spinner";
 import "../TolkunBuilder/TolkunBuilder.css"
 
 const TolkunBuilder = () => {
     const dispatch = useDispatch();
-    // const artists = useSelector(state => state.artists.artists);
-    // const loading = useSelector(state => state.artists.loading);
-    // const user = useSelector(state => state.users.user);
 
     useEffect(() => {
         // dispatch(fetchArtists());
@@ -38,26 +33,6 @@ const TolkunBuilder = () => {
                 <div className='info_statistic'><p className='amount'>Кол-во пользователей</p></div>
                 <div className='info_statistic'><p className='amount'>Кол-во складов</p></div>
             </div>
-           
-            
-           
-            
-            
-            {/*{loading*/}
-            {/*    ? <Spinner/>*/}
-            {/*    : <div className="List">*/}
-                    {/*{artists.map(artist => (*/}
-                    {/*    (artist.publish || (!artist.publish && artist.addedBy === user?._id)) &&*/}
-                    {/*    <ArtistsList*/}
-                    {/*        key={artist._id}*/}
-                    {/*        id={artist._id}*/}
-                    {/*        title={artist.title}*/}
-                    {/*        image={artist.image}*/}
-                    {/*        publish={artist.publish}*/}
-                    {/*    />*/}
-                    {/*))}*/}
-            {/*    </div>*/}
-            {/*}*/}
         </Grid>
     );
 };
