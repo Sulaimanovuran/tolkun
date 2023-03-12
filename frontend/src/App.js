@@ -25,14 +25,9 @@ const App = () => {
                 <Route path="/registration" component={Registration}/>
                 <Route path="/login" component={Login}/>
                 <Route path="/sales" component={Sales}/>
+                <Route render={() => <h1>Сервис в разработке</h1>}/>
 
-                {/*<ProtectedRoute*/}
-                {/*    isAllowed={user}*/}
-                {/*    redirectTo="/"*/}
-                {/*    path="/tracks/new"*/}
-                {/*    component={AddTrack}*/}
-                {/*/>*/}
-                <Route render={() => <h1>Not Found</h1>} />
+                {/*<Route render={() => <h1>Not Found</h1>} />*/}
             </Switch>
         </Layout>
     );
