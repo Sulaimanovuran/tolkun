@@ -6,14 +6,13 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import ProductEdit from '../../components/Modals/ProductEdit';
 import SearchIcon from "@mui/icons-material/Search";
-import {styled} from "@mui/material";
-import {Grid, Box, Typography, InputBase} from "@mui/material";
+import {Box, Grid, InputBase, styled, Typography} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchAllProducts} from "../../store/actions/productsActions";
+import {deleteProduct, fetchAllProducts} from "../../store/actions/productsActions";
 import ProductAdd from '../../components/Modals/ProductAdd';
 import useTableSearch from '../../components/UI/Filter/useTableSearch';
+import MenuButton from '../../components/UI/Buttons/MenuButton/MenuButton';
 
 const SearchStyle = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -57,7 +56,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Products = () => {
   const dispatch = useDispatch();
   const products = useSelector(state => state.products.allProducts);
-  const loading = useSelector(state => state.products.loading);
 
   const [searchVal, setSearchVal] = useState(null);
 
@@ -73,6 +71,11 @@ const Products = () => {
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, [dispatch]);
+
+  const deleteProductHandler = async id => {
+    await dispatch(deleteProduct());
+    dispatch(fetchAllProducts());
+  };
 
   return (
     <Box>
@@ -111,23 +114,14 @@ const Products = () => {
           </SearchStyle>
         </Grid>
       </Grid>
-      {/*<InnerTable*/}
-      {/*  header={<TableHeaderRow headerCells={columns} data={true} sx={{fontSize: "12px", fontWeight: "bold"}}/>}*/}
-      {/*  body={*/}
-      {/*    <DriverTableBody*/}
-      {/*      columns={columns}*/}
-      {/*      filteredData={drivers}*/}
-      {/*    />*/}
-      {/*  }*/}
-      {/*/>*/}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-          <TableHead>
+          <TableHead >
             <TableRow>
-              <TableCell>Название</TableCell>
-              <TableCell>Кол-во (шт)</TableCell>
-              <TableCell>Цена (с)</TableCell>
-              <TableCell>Склад</TableCell>
+              <TableCell sx={{fontSize: "14px", fontWeight: "bold"}}>Название</TableCell>
+              <TableCell sx={{fontSize: "14px", fontWeight: "bold"}}>Кол-во (шт)</TableCell>
+              <TableCell sx={{fontSize: "14px", fontWeight: "bold"}}>Цена (с)</TableCell>
+              <TableCell sx={{fontSize: "14px", fontWeight: "bold"}}>Склад</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -142,7 +136,12 @@ const Products = () => {
                 <TableCell>{row.count}</TableCell>
                 <TableCell>{row.price}</TableCell>
                 <TableCell>{row.warehouse.name}</TableCell>
-                <ProductEdit id={row.id}/>
+                <TableCell>
+                  <MenuButton
+                    id={row.id}
+                    deleteProduct={deleteProductHandler}
+                  />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

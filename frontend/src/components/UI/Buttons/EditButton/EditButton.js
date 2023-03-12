@@ -1,8 +1,7 @@
 import React from 'react';
 import {Grid} from "@mui/material";
-import EditIcon from '@mui/icons-material/MoreVert';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import {makeStyles} from "tss-react/mui";
-
 
 const useStyles = makeStyles()(() => ({
   edit: {
@@ -18,7 +17,7 @@ const EditButton = ({click}) => {
 
   return (
     <Grid item onClick={click} sx={{cursor: "pointer"}}>
-      <EditIcon sx={{ fontSize: 34 }} className={classes.edit} />
+      <ModeEditIcon sx={{ fontSize: 34 }} className={classes.edit} />
     </Grid>
   );
 };

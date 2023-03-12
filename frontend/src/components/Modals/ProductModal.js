@@ -1,17 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import InputField from "../UI/Form/InputField/InputField";
-import {Box, Fade, Grid, Modal, Typography, TextField} from "@mui/material";
+import {Fade, Grid, Modal, Typography} from "@mui/material";
 import FileInput from "../UI/Form/FileInput/FileInput";
 import ButtonWithProgress from "../UI/Buttons/ButtonWithProgress/ButtonWithProgress";
 import AddButton from "../UI/Buttons/AddButton/AddButton";
 import EditButton from "../UI/Buttons/EditButton/EditButton";
-import { addProduct, clearProductsErrors, editProduct, fetchProduct } from '../../store/actions/productsActions';
-import { useDispatch, useSelector } from 'react-redux';
+import {addProduct, clearProductsErrors, editProduct, fetchProduct} from '../../store/actions/productsActions';
+import {useDispatch, useSelector} from 'react-redux';
 import FormSelect from '../UI/Form/FormSelect/FormSelect';
-// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
+import noImage from '../../assets/noimage.jpeg';
 
 const style = {
   position: 'absolute',
@@ -37,8 +34,6 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
   const newError = useSelector(state => state.products.addError);
   const editError = useSelector(state => state.products.error );
   const loading = useSelector(state => state.products.loading );
-
-  const [date, setDate] = useState(null);
 
   const [newData, setNewData] = useState({
     name: '',
@@ -103,7 +98,7 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
         price: product.price,
         warehouse: product.warehouse,
         shelf_life: product.shelf_life,
-        accessibilty: product.accessibility,
+        accessibility: product.accessibility,
         imgage: product.imgage,
         life: product.life
       });
@@ -170,7 +165,7 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
         aria-describedby="transition-modal-description"
       >
         <Fade in={isAdd ? newModal : editModal}>
-          <Box sx={style}>
+          <Grid sx={style}>
             <div>
               <Grid>
                 <Typography
@@ -187,8 +182,35 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
                   container
                   spacing={2}
                   onSubmit={submitFormHandler}
-                  pr={'15px'}
                 >
+                  <Grid item width={{xs: '100%', md: '49.5%'}} textAlign={'center'} flexGrow={1}>
+                        <img src={isAdd ? noImage : editedData.imgage} alt='product' width='200'/>
+                  </Grid>
+                    <Grid item container spacing={2}>
+                      <Grid item width={{xs: '100%'}}>
+                        <InputField
+                          type={'name'}
+                          name={'name'}
+                          label={'Название'}
+                          value={isAdd ? newData.name : editedData.name}
+                          required={true}
+                          onChange={inputChangeHandler}
+                          error={getFieldError('name')}
+                        />
+                      </Grid>
+                      <Grid item width={{xs: '100%'}}>
+                        <InputField
+                          type={'number'}
+                          name={'price'}
+                          label={'Цена'}
+                          value={isAdd ? newData.price : editedData.price}
+                          required={true}
+                          onChange={inputChangeHandler}
+                          error={getFieldError('price')}
+                        />
+                      </Grid>
+                    </Grid>
+
                   <Grid item xs={12}>
                     <FileInput
                       label='Рисунок'
@@ -203,30 +225,6 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
                     justifyContent="space-between"
                     flexDirection={{xs: 'column', md: 'row'}}
                   >
-                    <Grid item width={{xs: '100%', md: '49.5%'}}>
-                      <InputField
-                        type={'name'}
-                        name={'name'}
-                        label={'Название'}
-                        value={isAdd ? newData.name : editedData.name}
-                        required={true}
-                        onChange={inputChangeHandler}
-                        error={getFieldError('name')}
-                      />
-                    </Grid>
-
-                    <Grid item width={{xs: '100%', md: '49.5%'}}>
-                      <InputField
-                        type={'number'}
-                        name={'price'}
-                        label={'Цена'}
-                        value={isAdd ? newData.price : editedData.price}
-                        required={true}
-                        onChange={inputChangeHandler}
-                        error={getFieldError('price')}
-                      />
-                    </Grid>
-
                     <Grid item width={{xs: '100%', md: '49.5%'}}>
                       <InputField
                         name={'count'}
@@ -259,24 +257,18 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
                         error={getFieldError('amount')}
                       />
                     </Grid>
+                    <Grid item width={{xs: '100%', md: '49.5%'}}>
                     <FormSelect
                         onChange={inputChangeHandler}
                         name='life'
-                        options={[{id: 'NOT', title: 'NOT'}, {id: 'YES', title: 'YES'}]}
+                        options={[{id: 'YES', title: 'да'}, {id: 'NOT', title: 'нет'}]}
                         label='Наличие срока годности'
                         value={isAdd ? newData.life : editedData.life}
                         error={getFieldError('life')}
                     />
-
                     </Grid>
 
-                    
-
-                    {/* <Grid item width={{xs: '100%', md: '49.5%'}}>
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker />
-                      </LocalizationProvider>
-                    </Grid> */}
+                    </Grid>
 
                   <Grid item sx={{width: {xs: '100%', md: '49.5%'}}}>
                     <ButtonWithProgress
@@ -305,7 +297,7 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
                 </Grid>
               </Grid>
             </div>
-          </Box>
+          </Grid>
         </Fade>
       </Modal>
     </>

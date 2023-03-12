@@ -114,14 +114,14 @@ export const editProduct = data => {
     };
 };
 
-export const deleteProducts = ids => {
+export const deleteProduct = id => {
     return async dispatch => {
         try{
             dispatch(deleteProductsRequest());
 
-            await axiosApi.delete('/product/api/' + ids);
+            await axiosApi.delete('/product/api/' + id);
             dispatch(deleteProductsSuccess());
-            useToastSuccess('Продукты удалены успешно!');
+            useToastSuccess('Продукт удален успешно!');
         } catch (e) {
             dispatch(deleteProductsFailure(e.message));
         }

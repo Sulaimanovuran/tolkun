@@ -18,7 +18,7 @@ const FormSelect = ({name, label, value, onChange, error, required, options}) =>
                     required={required}
                 >
                     {options.map(option => (
-                        <MenuItem key={option.id} value={option.title}>{option.title}</MenuItem>
+                        <MenuItem key={option.id} value={option.id}>{option.title}</MenuItem>
                     ))}
                 </Select>
                 <FormHelperText>{error}</FormHelperText>
