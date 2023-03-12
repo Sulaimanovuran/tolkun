@@ -1,4 +1,4 @@
-import { Grid, InputBase, Table, TableCell, TableHead, TableRow, Typography } from '@mui/material'
+import { Button, Grid, InputBase, Table, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 import {styled} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React, { useContext, useEffect, useState } from 'react'
@@ -16,12 +16,16 @@ function Sales() {
   const products = useSelector(state => state.products.allProducts);
 
     const [searchVal, setSearchVal] = useState('');
+  
+    
+    const {getTodos , todos , addTodos} = useContext(todosContext)
+   
+   const handeleAddClick = () => {
+    addTodos()
+   }
 
-    const {getTodos , todos} = useContext(todosContext)
-
-    useEffect(() => {
-      getTodos()
-    },[])
+   
+     
 
     const SearchStyle = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -74,13 +78,16 @@ function Sales() {
 });
 
   useEffect(() => {
+    getTodos()
     dispatch(fetchAllProducts());
   }, [dispatch]);
 
+  
 
   return (
     <div className='box_get'>
     <div className='product_box'>
+      
     <Grid item sx={{paddingLeft: "15px"}}>
         <Typography variant="h5" fontWeight="bold" textTransform="uppercase">
           Товары и услуги
@@ -116,7 +123,8 @@ function Sales() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredData.map((row) => (
+            
+            {/* {filteredData.map((row) => (
               <TableRow
                 key={row.name}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -130,10 +138,35 @@ function Sales() {
                 <ProductEdit id={row.id}/>
               </TableRow>
             ))}
+             */}
+
+{ todos.data ? todos.data.map((todo) => {
+     return (
+     <div key={todo.id} className='card_product'> 
+      <span>{todo.name}</span>
+      <span>{todo.price}</span>
+      <span>{todo.count}</span>
+      <span>{todo.life}</span>
+      <img className='product_img' width="200px" height="200px" src={todo.imgage? todo.imgage : "https://rosservice-t.ru/wp-content/uploads/2021/04/a7925-1.jpg"} alt="" />
+      {/* <button className='btn' onClick={handeleAddClick} >+</button> */}
+     </div>
+     )
+      }) : ""}
           </TableBody>
           </Table>
     </div>
-    <div className='cart_box'></div>
+    <div className='cart_box'>
+    { todos.data ? todos.data.map((todo) => {
+     return (
+     <div key={todo.id} className='card_product'> 
+      <span>{todo.name}</span>
+      <span>{todo.price}</span>
+      <span>{todo.count}</span>
+      <span>{todo.life}</span>
+      <img className='product_img' src={todo.imgage} width="200px" height="200px" alt="" />
+     </div> 
+     ) } ) : "" }
+    </div>
     </div>
   )
 }

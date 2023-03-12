@@ -10,14 +10,13 @@ import TodosContextProvider from './context/todosContext';
 
 
 const app = (
+      <TodosContextProvider>
     <Provider store={store}>
-        <TodosContextProvider>
             <Router history={history}>
             <App/>
-        </Router>
-        </TodosContextProvider>
-        
+        </Router>   
     </Provider>
+    </TodosContextProvider>
 );
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
