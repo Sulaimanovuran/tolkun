@@ -56,7 +56,6 @@ export const fetchAllProducts = () => {
             dispatch(fetchAllProductsRequest());
 
             const response = await axiosApi('/product/api');
-            console.log(response);
             dispatch(fetchAllProductsSuccess(response.data));
         } catch (e) {
             dispatch(fetchAllProductsFailure(e.message));
@@ -68,7 +67,6 @@ export const fetchProduct = id => {
     return async dispatch => {
         try {
             dispatch(fetchProductRequest());
-
             const response = await axiosApi('/product/api/' + id);
             dispatch(fetchProductSuccess(response.data));
         } catch (e) {

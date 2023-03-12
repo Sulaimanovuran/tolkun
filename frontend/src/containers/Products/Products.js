@@ -135,7 +135,7 @@ const Products = () => {
                 </TableCell>
                 <TableCell>{row.count}</TableCell>
                 <TableCell>{row.price}</TableCell>
-                <TableCell>{row.warehouse.name}</TableCell>
+                <TableCell>{row.warehouse.title}</TableCell>
                 <TableCell>
                   <MenuButton
                     id={row.id}

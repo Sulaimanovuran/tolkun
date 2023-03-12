@@ -1,6 +1,6 @@
 import React from 'react';
-import {Grid} from "@mui/material";
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import {Grid, TableCell} from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
 import {makeStyles} from "tss-react/mui";
 
 const useStyles = makeStyles()(() => ({
@@ -16,9 +16,11 @@ const EditButton = ({click}) => {
   const {classes} = useStyles();
 
   return (
-    <Grid item onClick={click} sx={{cursor: "pointer"}}>
-      <ModeEditIcon sx={{ fontSize: 25 }} className={classes.edit} />
-    </Grid>
+    // <Grid item onClick={click} sx={{cursor: "pointer"}} flexGrow={1}>
+    <TableCell>
+      <DeleteIcon sx={{ fontSize: 25 }} className={classes.edit} />
+    {/*</Grid>*/}
+    </TableCell>
   );
 };
 

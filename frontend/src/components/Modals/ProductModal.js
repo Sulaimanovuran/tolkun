@@ -24,11 +24,11 @@ const style = {
   maxHeight: '600px',
 };
 const ProductModal = ({modalTitle, product_id, isAdd}) => {
+  console.log(product_id);
   const dispatch = useDispatch();
   const [newModal, setNewModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
 
-  const [id, setId] = useState('');
   const product = useSelector(state => state.products.product);
   const products = useSelector(state => state.products.products);
   const newError = useSelector(state => state.products.addError);
@@ -39,7 +39,9 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
     name: '',
     count: '',
     price: '',
-    warehouse: '',
+    warehouse: {
+      title: '',
+    },
     shelf_life: '',
     accessibility: '',
     imgage: '',
@@ -50,7 +52,9 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
     name: '',
     count: '',
     price: '',
-    warehouse: '',
+    warehouse: {
+      title: '',
+    },
     shelf_life: '',
     accessibility: '',
     imgage: '',
@@ -59,7 +63,7 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
 
   useEffect(() => {
     if (product_id) {
-          dispatch(fetchProduct(product_id));
+      dispatch(fetchProduct(product_id));
     }
   }, [dispatch, product_id]);
   
@@ -79,7 +83,9 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
         name: '',
         count: '',
         price: '',
-        warehouse: '',
+        warehouse: {
+          title: '',
+        },
         shelf_life: '',
         accessibility: '',
         imgage: '',
@@ -89,18 +95,19 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
       setNewModal(true);
       dispatch(clearProductsErrors());
     } else if (!isAdd) {
-      const product = products.find(item => item.id === product_id);
-      setId(product.id);
+      const prod = products.find(item => item.id === product_id);
 
       setEditedData({
-        name: product.name,
-        count: product.count,
-        price: product.price,
-        warehouse: product.warehouse,
-        shelf_life: product.shelf_life,
-        accessibility: product.accessibility,
-        imgage: product.imgage,
-        life: product.life
+        name: prod.name,
+        count: prod.count,
+        price: prod.price,
+        warehouse: {
+          title: prod.warehouse.title
+        },
+        shelf_life: prod.shelf_life,
+        accessibility: prod.accessibility,
+        imgage: prod.imgage,
+        life: prod.life
       });
 
       setEditModal(true);
@@ -138,7 +145,7 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
     if (isAdd) {
       dispatch(addProduct({data: formData}));
     } else {
-      dispatch(editProduct({id, data: formData}));
+      dispatch(editProduct({product_id, data: formData}));
     }
   };
 
@@ -155,7 +162,7 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
       {isAdd
         ? <AddButton click={openCloseModal}/>
         : <EditButton
-          click={() => openCloseModal(id)}
+          click={() => openCloseModal(product_id)}
         />
       }
       <Modal
@@ -235,21 +242,22 @@ const ProductModal = ({modalTitle, product_id, isAdd}) => {
                     </Grid>
 
                     <Grid item width={{xs: '100%', md: '49.5%'}}>
-                      <InputField
-                        name={'accessibility'}
-                        label={'Наличие'}
-                        value={isAdd ? newData.accessibility : editedData.accessibility}
+                      <FormSelect
                         onChange={inputChangeHandler}
+                        name='accessibility'
+                        options={[{id: true, title: 'да'}, {id: false, title: 'нет'}]}
+                        label='Наличие'
+                        value={isAdd ? newData.accessibility : editedData.accessibility}
                         error={getFieldError('accessibility')}
                       />
                     </Grid>
                     <Grid item width={{xs: '100%', md: '49.5%'}}>
                       <InputField
-                        name={'warehouse'}
+                        name={'title'}
                         label={'Склад'}
-                        value={isAdd ? newData.warehouse : editedData.warehouse}
+                        value={isAdd ? newData.warehouse.title : editedData.warehouse.title}
                         onChange={inputChangeHandler}
-                        error={getFieldError('amount')}
+                        error={getFieldError('warehouse.title')}
                       />
                     </Grid>
                     <Grid item width={{xs: '100%', md: '49.5%'}}>

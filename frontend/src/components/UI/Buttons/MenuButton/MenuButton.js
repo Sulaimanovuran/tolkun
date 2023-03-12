@@ -1,8 +1,8 @@
 import React from 'react';
 import {IconButton, Menu, MenuItem} from "@mui/material";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import DeleteIcon from '@mui/icons-material/Delete';
 import ProductEdit from "../../../Modals/ProductEdit";
+import DeleteButton from "../DeleteButton/DeleteButton";
 
 const MenuButton = ({id, deleteProduct}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -39,7 +39,7 @@ const MenuButton = ({id, deleteProduct}) => {
           <ProductEdit id={id}/>
         </MenuItem>
         <MenuItem onClick={() => [deleteProduct(id), handleClose()]}>
-          <DeleteIcon/>
+          <DeleteButton/>
         </MenuItem>
       </Menu>
     </div>

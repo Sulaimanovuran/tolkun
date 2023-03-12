@@ -29,7 +29,6 @@ const FormSelect = ({name, label, value, onChange, error, required, options}) =>
 
 FormSelect.propTypes = {
     name: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     options: PropTypes.arrayOf(PropTypes.object).isRequired,
     label: PropTypes.string.isRequired,

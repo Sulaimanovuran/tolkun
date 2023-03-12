@@ -4,12 +4,14 @@ import usersReducer, {initialState} from "./reducers/usersReducer";
 import thunk from "redux-thunk";
 import {loadFromLocalStorage, saveToLocalStorage} from "./localStorage";
 import axiosApi from "../axiosApi";
+import countsReducer from "./reducers/countsReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     users: usersReducer,
     products: productsReducer,
+    counts: countsReducer
 });
 
 const persistedState = loadFromLocalStorage();

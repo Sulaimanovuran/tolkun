@@ -1,6 +1,6 @@
 import React from 'react';
 import {Grid, TextField} from "@mui/material";
-import PropTypes from 'prop-types';
+import PropTypes, {bool, number} from 'prop-types';
 
 const InputField = ({name, value, onChange, label, error, type, required, margin}) => {
     return (
@@ -24,7 +24,7 @@ const InputField = ({name, value, onChange, label, error, type, required, margin
 
 InputField.propTypes = {
     name: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
+    // value: PropTypes.string||bool||number.isRequired,
     onChange: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired,
     error: PropTypes.string,

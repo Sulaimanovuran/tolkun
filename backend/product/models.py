@@ -2,10 +2,10 @@ from django.db import models
 
 
 class Warehouse(models.Model):
-    name = models.CharField(max_length=200, verbose_name='Наименование склада: ')
+    title = models.CharField(max_length=200, verbose_name='Наименование склада: ')
 
     def __str__(self):
-        return f'{self.id}. {self.name}'
+        return f'{self.id}. {self.title}'
     
     class Meta:
         verbose_name = 'Склад'
